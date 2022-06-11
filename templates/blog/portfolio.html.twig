@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="Texte">
+    <h1 class="BgVert"><b> Mon portfolio</b> </h1>
+</div>
+<div class="Texte">
+    <h5>Vous trouverez ci-desssous mes compétences maitrisées avec un apperçu de mes travaux, ainsi que le lien vers mon portfolio </h5><br>
+    Pour accéder a la totalité de mon portfolio de compétence de l'IUT de Roanne, cliquez
+     <a href="https://docs.google.com/spreadsheets/d/1dQR4062Vrgr8fZvTNYRgBPsT82qtUARGakZvWm7bAKw/edit?usp=sharing">ici</a>.
+
+</div>
+
+<div class = "row">
+    <div class="col-sm-4">
+            <button class="button buttonvert center" onclick="window.location.href = '/cca';">Administrer les réseaux et l’Internet</button>
+            <br>
+    </div>
+    <div class="col-sm-4">
+            <button class="button buttonvert center" onclick="window.location.href = '/ccb';">Connecter les entreprises et les usagers</button>
+            <br>
+    </div>
+    <div class="col-sm-4">
+        <button class="button buttonvert center" onclick="window.location.href = '/ccc';">Créer des outils et applications informatiques pour les R&T</button>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
