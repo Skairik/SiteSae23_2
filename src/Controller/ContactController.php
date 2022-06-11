@@ -45,4 +45,16 @@ class ContactController extends AbstractController
             'demande' => 'Votre demande a été prise en compte'
         ]);
     }
+
+    /**
+     * @Route("/colab", name="colab")
+     */
+    public function colab(): Response
+    {
+        $colab = $this->getDoctrine()->getRepository(Demande::class)->findAll();
+        return $this->render('contact/colab.html.twig', [
+            'controller_name' => 'ContactController',
+            'colab' => $colab,
+        ]);
+    }
 }

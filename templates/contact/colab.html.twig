@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class= "Texte">
+    <h1>Liste de nos colaborateurs</h1>
+        {% for colab in colab %}
+            <p>{{ colab.entname }}</p>
+        {% endfor %}
+<div>
+
+{% endblock %}
