@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="Texte">
+<p> Vous êtes une entreprise et vous avez besoin de nos services?<br>
+Alors n'attendez plus et faites votre demande dès maintenant en remplissant ce formulaire</p><br>
+<p> {{ demande }}
+
+
+    <form action="/contactbis" method="post">
+        <div class="container">
+            <label for="entname"><b>Nom de l'entreprise</b></label><br>
+            <input type="text" placeholder="Entrez le nom de l'entreprise" name="entname" id="entname" required><br><br>
+            <label for="name"><b>Nom de la personne faisaint la demande</b></label> <br>
+            <input type="text" placeholder="Entrez votre nom" name="name" id="name" required><br><br>
+            <label for="name"><b>Entrez un mail pour que l'on puisse prendre contact avec vous</b></label> <br>
+            <input type="text" placeholder="Entrez votre mail" name="mail" id="mail" required><br><br>
+            <label for="name"><b>Décrivez ce dont vous avez besoin</b></label> <br>
+            <input type="text" placeholder="Entrez l'objet de votre demande" name="objet" id="objet" required><br><br>
+            <label for="myCheck">Je souhaite envoyé ma demande</label> 
+            <input type="checkbox" id="myCheck" onclick="checkBox()">
+            <p id="text" style="display:none"><button class="button buttonvert centrebut" type="submit">Envoyer ma demande</button></p>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

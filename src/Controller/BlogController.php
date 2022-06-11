@@ -7,8 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+
 use App\Entity\Demande;
 
 
@@ -27,7 +27,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home()
+    public function home(): Response
     {
         return $this->render('blog/home.html.twig');
     }
@@ -35,15 +35,15 @@ class BlogController extends AbstractController
     /**
      * @Route("/cv", name="cv")
      */
-    public function cv()
+    public function cv(): Response
     {
         return $this->render('blog/cv.html.twig');
     }
 
-     /**
+    /**
      * @Route("/portfolio", name="portfolio")
      */
-    public function portfolio()
+    public function portfolio(): Response
     {
         return $this->render('blog/portfolio.html.twig');
     }
@@ -51,7 +51,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/cca", name="cca")
      */
-    public function cca()
+    public function cca(): Response
     {
         return $this->render('blog/cca.html.twig');
     }
@@ -59,7 +59,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/ccb", name="ccb")
      */
-    public function ccb()
+    public function ccb(): Response
     {
         return $this->render('blog/ccb.html.twig');
     }
@@ -67,7 +67,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/ccc", name="ccc")
      */
-    public function ccc()
+    public function ccc(): Response
     {
         return $this->render('blog/ccc.html.twig');
     }
@@ -75,26 +75,8 @@ class BlogController extends AbstractController
     /**
      * @Route("/ensavoirplus", name="ensavoirplus")
      */
-    public function ensavoirplus()
+    public function ensavoirplus(): Response
     {
         return $this->render('blog/passion.html.twig');
-    }
-        
-    /**
-     * @Route("/contactbis", name="contactbis")
-     */
-    public function contactbis()
-    {
-        return $this->render('blog/contact.html.twig');
-    }
-
-    /**
-     * @Route("/contact", name="contact")
-     */
-    public function contact()
-    {
-        return $this->render('blog/contact.html.twig',[
-            'demande' => ''
-        ]);
     }
 }
