@@ -5,6 +5,12 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Demande;
+
 
 class BlogController extends AbstractController
 {
@@ -76,9 +82,35 @@ class BlogController extends AbstractController
 
     /**
      * @Route("/contact", name="contect")
-     */
+    */
     public function contact()
     {
-        return $this->render('blog/contact.html.twig');
+        return $this->render('blog/contact.html.twig',[
+            'demande' => ''
+        ]);
+    }
+
+    /**
+     * @Route("/contactbis", name="contectbis")
+    */
+    public function contactbis(Request $request,
+    EntityManagerInterface $manager)
+    {
+        $demande = new Demande();
+        $demande->setEntname($request->request->get("entname"));
+        $demande->persist($entname);
+        $demande->flush();
+        $demande->setName($request->request->get("name"));
+        $demande->persist($nom);
+        $demande->flush();
+        $demande->setMail($request->request->get("mail"));
+        $demande->persist($mail);
+        $demande->flush();
+        $demande->setObjet($request->request->get("objet"));
+        $demande->persist($objet);
+        $demande->flush();
+        return $this->render('blog/contact.html.twig',[
+            'demande' => 'Votre demande a été prise en compte'
+        ]);
     }
 }

@@ -53,8 +53,10 @@
           var text = document.getElementById("text");
           var name = document.getElementById("name");
           var entname = document.getElementById("entname");
+          var mail = document.getElementById("mail");
+          var objet = document.getElementById("objet");
           if (checkBox.checked == true){
-            if (name.value!="" && entname.value!=""){
+            if (name.value!="" && entname.value!="" && mail.value!="" && objet.value!=""){
               text.style.display = "block";
             }
             else{
