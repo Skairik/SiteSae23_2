@@ -79,38 +79,22 @@ class BlogController extends AbstractController
     {
         return $this->render('blog/passion.html.twig');
     }
+        
+    /**
+     * @Route("/contactbis", name="contactbis")
+     */
+    public function contactbis()
+    {
+        return $this->render('blog/contact.html.twig');
+    }
 
     /**
-     * @Route("/contact", name="contect")
-    */
+     * @Route("/contact", name="contact")
+     */
     public function contact()
     {
         return $this->render('blog/contact.html.twig',[
             'demande' => ''
-        ]);
-    }
-
-    /**
-     * @Route("/contactbis", name="contectbis")
-    */
-    public function contactbis(Request $request,
-    EntityManagerInterface $manager)
-    {
-        $demande = new Demande();
-        $demande->setEntname($request->request->get("entname"));
-        $demande->persist($entname);
-        $demande->flush();
-        $demande->setName($request->request->get("name"));
-        $demande->persist($nom);
-        $demande->flush();
-        $demande->setMail($request->request->get("mail"));
-        $demande->persist($mail);
-        $demande->flush();
-        $demande->setObjet($request->request->get("objet"));
-        $demande->persist($objet);
-        $demande->flush();
-        return $this->render('blog/contact.html.twig',[
-            'demande' => 'Votre demande a été prise en compte'
         ]);
     }
 }
