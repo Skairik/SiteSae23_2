@@ -35,7 +35,7 @@
             <div class="container">
               {% block body %}{% endblock %}
             </div>
-            <p class ="Fin" ><a href="#" class="btn btn-default">Retour en haut ↑</a><br> © MALOSSE Tom 2021</p>
+            <p class ="Fin" ><a href="#" class="btn btn-default">Retour en haut ↑</a><br> © MALOSSE &CO 2022</p>
           </div>
         </div>
       </div>  
@@ -51,10 +51,10 @@
         function checkBox() {
           var checkBox = document.getElementById("myCheck");
           var text = document.getElementById("text");
-          var mail = document.getElementById("mail");
-          var name = document.getElementById("nom");
+          var name = document.getElementById("name");
+          var entname = document.getElementById("entname");
           if (checkBox.checked == true){
-            if (mail.value!="" && name.value!=""){
+            if (name.value!="" && entname.value!=""){
               text.style.display = "block";
             }
             else{

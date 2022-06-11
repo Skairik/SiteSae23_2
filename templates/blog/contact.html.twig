@@ -3,16 +3,21 @@
 {% block body %}
 
 <div class="Texte">
+<p> Vous êtes une entreprise et vous avez besoin de nos services?<br>
+Alors n'attendez plus et faites votre demande dès maintenant en remplissant ce formulaire</p>
+
     <form action="http://127.0.0.1:8000/cv2.pdf" method="post">
         <div class="container">
-            <label for="uname"><b>Nom</b></label><br>
-            <input type="text" placeholder="Entrez votre nom" name="uname" id="nom" required><br><br>
-            <label for="psw"><b>Email</b></label> <br>
-            <input type="text" placeholder="Entrez votre email" name="mail" id="mail" required><br><br>
-            <label for="myCheck">Je souhaite téléchargé le CV:</label> 
+            <label for="entname"><b>Nom de l'entreprise</b></label><br>
+            <input type="text" placeholder="Entrez le nom de l'entreprise" name="entname" id="entname" required><br><br>
+            <label for="name"><b>Nom de la personne faisaint la demande</b></label> <br>
+            <input type="text" placeholder="Entrez votre nom" name="name" id="name" required><br><br>
+            <label for="name"><b>Nom de la personne faisaint la demande</b></label> <br>
+            <input type="text" placeholder="Entrez votre nom" name="name" id="name" required><br><br>
+            <label for="myCheck">Je souhaite envoyé ma demande</label> 
             <input type="checkbox" id="myCheck" onclick="checkBox()">
+            <p id="text" style="display:none"><button class="button buttonvert centrebut" type="submit">Envoyer ma demande</button></p>
 
-            <p id="text" style="display:none"><button class="button buttonvert centrebut" onclick="window.location.href = 'http://127.0.0.1:8000/cv2.pdf';">Télécharger CV</button></p>
         </div>
     </form>
 </div>
