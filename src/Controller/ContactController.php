@@ -8,10 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use \gettype;
-
+use Symfony\Component\Security\Core\Security;
 
 use App\Entity\Demande;
 use App\Entity\Commande;
@@ -76,6 +74,7 @@ class ContactController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/commande", name="commande")
      */
     public function commande(): Response
@@ -88,12 +87,16 @@ class ContactController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/commandebis", name="commandebiss")
      */
     public function commandebis(Request $request,
-    EntityManagerInterface $manager): Response
+    EntityManagerInterface $manager,Security $security): Response
     {
         $ids=$request->request->get("ids");
+        $user=$security->getUser();
+        $this->addCommande();
+        dump($user);
         $prestas = array();
         $id=0;
         foreach ($ids as $id){
@@ -115,8 +118,10 @@ class ContactController extends AbstractController
             'ids' => $ids,
             'prestanom'=> $prestanom,
             'prestaprix'=>$prestaprix,
-            'total' => $total
+            'total' => $total,
+            'iduser'=> $user
         ]);
+
     }
 
     /**
