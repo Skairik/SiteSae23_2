@@ -102,9 +102,6 @@ class ContactController extends AbstractController
         }
         $manager->flush();
         dump($user->getCommande());
-
-
-        
         $prestas = array();
         $id=0;
         foreach ($ids as $id){
