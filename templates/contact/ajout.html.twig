@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="Texte">
+    <form action="/ajoutbis" method="post">
+        <div class="container">
+            <label for="entname"><b>Entrer le nom du service</b></label><br>
+            <input type="text" placeholder="Entrez le nom du service" name="service" id="service" required><br><br>
+            <label for="name"><b>Prix</b></label> <br>
+            <input type="number" placeholder="Entrez le prix" name="prix" id="prix" required><br><br>
+            <button class="button buttonvert centrebut" type="submit">Envoyer ma demande</button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

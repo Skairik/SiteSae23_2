@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 use App\Entity\Demande;
+use App\Entity\Commande;
 
 class ContactController extends AbstractController
 {
@@ -65,31 +66,53 @@ class ContactController extends AbstractController
      */
     public function commande(): Response
     {
-        $colab = $this->getDoctrine()->getRepository(Demande::class)->findAll();
+        $commande = $this->getDoctrine()->getRepository(Commande::class)->findAll();
         return $this->render('contact/commande.html.twig', [
             'controller_name' => 'ContactController',
-            'colab' => $colab,
+            'commande' => $commande,
         ]);
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
-     * @Route("/ajout", name="ajout")
+     * @Route("/commandebis", name="commandebiss")
      */
-    public function ajout(Request $request,
+    public function commandebis(Request $request,
     EntityManagerInterface $manager): Response
     {
-        $demande = new Demande();
-        $demande->setEntname($request->request->get("entname"));
+
+        $ids=$request->request->get("ids");
+        return $this->render('contact/resultat.html.twig', [
+            'controller_name' => 'ContactController',
+            'demande' => $service,
+        ]);
+    }
+
+    /**
+     * @Route("/ajout", name="ajout")
+     */
+    public function ajout(): Response
+    {
+        
+        return $this->render('contact/ajout.html.twig', [
+            'controller_name' => 'ContactController',
+        ]);
+    }
+
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/ajoutbis", name="ajoutbis")
+     */
+    public function ajoutbis(Request $request,
+    EntityManagerInterface $manager): Response
+    {
+        $demande = new Commande();
+        $demande->setService($request->request->get("service"));
         $manager->persist($demande);
-        $demande->setName($request->request->get("name"));
-        $manager->persist($demande);
-        $demande->setMail($request->request->get("mail"));
-        $manager->persist($demande);
-        $demande->setObjet($request->request->get("objet"));
+        $demande->setPrix($request->request->get("prix"));
         $manager->persist($demande);
         $manager->flush();
-        return $this->render('contact/commande.html.twig', [
+        return $this->render('contact/ajout.html.twig', [
             'controller_name' => 'ContactController',
         ]);
     }

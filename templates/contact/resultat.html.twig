@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="Texte">
+    <p>Merci pour votre achat !</p>
+    <p> Voici un récapitulatif de votre achat</p>
+    {% for demande in demande %}
+        <p>- {{ demande }} € </p>
+    {% endfor %}
+</div>
+{% endblock %}
