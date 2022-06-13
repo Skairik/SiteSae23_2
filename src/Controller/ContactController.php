@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 use App\Entity\Demande;
@@ -69,4 +71,27 @@ class ContactController extends AbstractController
             'colab' => $colab,
         ]);
     }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/ajout", name="ajout")
+     */
+    public function ajout(Request $request,
+    EntityManagerInterface $manager): Response
+    {
+        $demande = new Demande();
+        $demande->setEntname($request->request->get("entname"));
+        $manager->persist($demande);
+        $demande->setName($request->request->get("name"));
+        $manager->persist($demande);
+        $demande->setMail($request->request->get("mail"));
+        $manager->persist($demande);
+        $demande->setObjet($request->request->get("objet"));
+        $manager->persist($demande);
+        $manager->flush();
+        return $this->render('contact/commande.html.twig', [
+            'controller_name' => 'ContactController',
+        ]);
+    }
+
 }

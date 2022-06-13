@@ -36,6 +36,19 @@
                   <a href="/colab">Liste de nos colaborateurs</a>
                 </div>
               </div>
+              <div class="gdropdown">
+                <button class="gdropbtn">Compte 
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="gdropdown-content">
+                  <a href="/login">Connexion</a>
+                  <a href="/register">S'inscrire</a>
+                  <a href="/logout">Se déconnecter</a>
+                  <a> {{ app.user.username }} <a>
+                </div>
+              </div>
+              <a href="/ajout">Ajouter un service</a>
+              
               <a href="javascript:void(0);" class="icon" onclick="myFunction()">
               <i class="fa fa-bars"></i>
               </a>
