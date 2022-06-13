@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use \gettype;
 
 
 use App\Entity\Demande;
@@ -98,13 +99,15 @@ class ContactController extends AbstractController
         array_push($prestas, $temp);
         $temp = $this->getDoctrine()->getRepository(Prestation::class)->findOneBy(['id'=>2],);
         array_push($prestas, $temp);
+        $prestaend = array();
         foreach ($prestas as $presta){
-            dump($presta);
+            array_push($prestaend, $presta->getNom());
         }
+        dump($prestaend);
         return $this->render('contact/resultat.html.twig', [
             'controller_name' => 'ContactController',
             'ids' => $ids,
-            'presta'=> $presta,
+            'presta'=> $prestaend,
         ]);
     }
 
