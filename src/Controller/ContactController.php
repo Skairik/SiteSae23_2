@@ -57,4 +57,16 @@ class ContactController extends AbstractController
             'colab' => $colab,
         ]);
     }
+
+    /**
+     * @Route("/commande", name="commande")
+     */
+    public function commande(): Response
+    {
+        $colab = $this->getDoctrine()->getRepository(Demande::class)->findAll();
+        return $this->render('contact/commande.html.twig', [
+            'controller_name' => 'ContactController',
+            'colab' => $colab,
+        ]);
+    }
 }
