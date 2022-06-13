@@ -95,19 +95,27 @@ class ContactController extends AbstractController
     {
         $ids=$request->request->get("ids");
         $prestas = array();
-        $temp = $this->getDoctrine()->getRepository(Prestation::class)->findOneBy(['id'=>1],);
-        array_push($prestas, $temp);
-        $temp = $this->getDoctrine()->getRepository(Prestation::class)->findOneBy(['id'=>2],);
-        array_push($prestas, $temp);
-        $prestaend = array();
-        foreach ($prestas as $presta){
-            array_push($prestaend, $presta->getNom());
+        $id=0;
+        foreach ($ids as $id){
+            $temp = $this->getDoctrine()->getRepository(Prestation::class)->findOneBy(['id'=>$id],);
+            array_push($prestas, $temp);
         }
-        dump($prestaend);
+        $prestanom = array();
+        $prestaprix = array();
+        $total = 0;
+        foreach ($prestas as $presta){
+            array_push($prestanom, $presta->getNom());
+        }
+        foreach ($prestas as $presta){
+            array_push($prestaprix, $presta->getPrix());
+            $total = $total + $presta->getPrix();
+        }
         return $this->render('contact/resultat.html.twig', [
             'controller_name' => 'ContactController',
             'ids' => $ids,
-            'presta'=> $prestaend,
+            'prestanom'=> $prestanom,
+            'prestaprix'=>$prestaprix,
+            'total' => $total
         ]);
     }
 

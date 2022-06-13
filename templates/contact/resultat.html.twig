@@ -5,8 +5,13 @@
 <div class="Texte">
     <p>Merci pour votre achat !</p>
     <p> Voici un récapitulatif de votre achat</p>
-    {% for presta in presta %}
-        <p>- {{ presta }} € </p>
-    {% endfor %}
+    <p> Vous avez achetez les prestations suivante :
+    {% for prestanom in prestanom %}
+         {{ prestanom }},  
+    {% endfor %}</p>
+    <p> Pour un total de 
+    {% for prestaprix in prestaprix %}
+         {{ prestaprix }} +  
+    {% endfor %}= {{ total }}</p>
 </div>
 {% endblock %}
