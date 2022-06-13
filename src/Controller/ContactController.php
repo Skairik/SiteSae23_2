@@ -95,8 +95,16 @@ class ContactController extends AbstractController
     {
         $ids=$request->request->get("ids");
         $user=$security->getUser();
-        $this->addCommande();
-        dump($user);
+        foreach($ids as $id){
+            $prest=$manager->getRepository(Prestation::class)->find($id);
+            $user->addCommande($prest);
+
+        }
+        $manager->flush();
+        dump($user->getCommande());
+
+
+        
         $prestas = array();
         $id=0;
         foreach ($ids as $id){
