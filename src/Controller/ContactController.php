@@ -79,10 +79,10 @@ class ContactController extends AbstractController
      */
     public function commande(): Response
     {
-        $commande = $this->getDoctrine()->getRepository(Prestation::class)->findAll();
+        $presta = $this->getDoctrine()->getRepository(Prestation::class)->findAll();
         return $this->render('contact/commande.html.twig', [
             'controller_name' => 'ContactController',
-            'commande' => $commande,
+            'presta' => $presta,
         ]);
     }
 
@@ -106,7 +106,6 @@ class ContactController extends AbstractController
      */
     public function ajout(): Response
     {
-        
         return $this->render('contact/ajout.html.twig', [
             'controller_name' => 'ContactController',
         ]);

@@ -6,8 +6,8 @@
     <h1>Liste de nos services</h1>
     <h3>Services</h3>
     <form action="/commandebis" method="post">
-        {% for commande in commande %}
-            <input type="checkbox" name="ids[]" value="{{commande.id}}">  {{ commande.service }} : {{ commande.prix }} €<br>
+        {% for presta in presta %}
+            <input type="checkbox" name="ids[]" value="{{presta.id}}">  {{ presta.nom }} : {{ presta.prix }} €<br>
         {% endfor %}
         <label for="entname"><b>Entrer votre nom</b></label><br>
         <input type="text" placeholder="Entrez votre nom" name="cname" id="cname" required><br><br>
@@ -15,7 +15,6 @@
     </form>
 <div>
 
-</div>
 
 
-{% endblock %}
+{% endblock %} 
