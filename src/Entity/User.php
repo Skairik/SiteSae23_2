@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -36,6 +38,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Prestation::class, inversedBy="users")
+     */
+    private $Commande;
+
+
+    public function __construct()
+    {
+        $this->commandes = new ArrayCollection();
+        $this->Commande = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -125,4 +139,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    /**
+     * @return Collection|Prestation[]
+     */
+    public function getCommande(): Collection
+    {
+        return $this->Commande;
+    }
+
+    public function addCommande(Prestation $commande): self
+    {
+        if (!$this->Commande->contains($commande)) {
+            $this->Commande[] = $commande;
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Prestation $commande): self
+    {
+        $this->Commande->removeElement($commande);
+
+        return $this;
+    }
+
 }

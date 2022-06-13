@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 use App\Entity\Demande;
 use App\Entity\Commande;
+use App\Entity\Prestation;
 
 class ContactController extends AbstractController
 {
@@ -62,11 +63,23 @@ class ContactController extends AbstractController
     }
 
     /**
+     * @Route("/listepresta", name="listepresta")
+     */
+    public function listepresta(): Response
+    {
+        $commande = $this->getDoctrine()->getRepository(Prestation::class)->findAll();
+        return $this->render('contact/listepresta.html.twig', [
+            'controller_name' => 'ContactController',
+            'commande' => $commande,
+        ]);
+    }
+
+    /**
      * @Route("/commande", name="commande")
      */
     public function commande(): Response
     {
-        $commande = $this->getDoctrine()->getRepository(Commande::class)->findAll();
+        $commande = $this->getDoctrine()->getRepository(Prestation::class)->findAll();
         return $this->render('contact/commande.html.twig', [
             'controller_name' => 'ContactController',
             'commande' => $commande,
@@ -88,6 +101,7 @@ class ContactController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/ajout", name="ajout")
      */
     public function ajout(): Response
@@ -106,8 +120,8 @@ class ContactController extends AbstractController
     public function ajoutbis(Request $request,
     EntityManagerInterface $manager): Response
     {
-        $demande = new Commande();
-        $demande->setService($request->request->get("service"));
+        $demande = new Prestation();
+        $demande->setNom($request->request->get("service"));
         $manager->persist($demande);
         $demande->setPrix($request->request->get("prix"));
         $manager->persist($demande);

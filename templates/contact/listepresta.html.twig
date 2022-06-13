@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class= "Texte">
+    <h1>Liste de nos services</h1>
+    <h3>Services</h3>
+    <form action="/commandebis" method="post">
+        {% for commande in commande %}
+            <p> {{ commande.nom }}: {{ commande.prix }} € <p>
+        {% endfor %}
+    </form>
+<div>
+
+{% endblock %}

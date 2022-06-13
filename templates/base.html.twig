@@ -25,7 +25,16 @@
           <div class="Barre">
             <div class="topnav" id="myTopnav">
               <a href="/" class="active">Accueil</a>
-              <a href="/commande">Passer commande</a>
+
+              <div class="gdropdown">
+                <button class="gdropbtn">Nos prestations 
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="gdropdown-content">
+                  <a href="/listepresta">Liste de nos prestations</a>
+                  <a href="/commande">Passer commande</a>
+                </div>
+              </div>
               <div class="gdropdown">
                 <button class="gdropbtn">Colaboration 
                   <i class="fa fa-caret-down"></i>
@@ -43,10 +52,9 @@
                   <a href="/login">Connexion</a>
                   <a href="/register">S'inscrire</a>
                   <a href="/logout">Se déconnecter</a>
-                  <a> {{ app.user.username }} <a>
                 </div>
               </div>
-              <a href="/ajout">Ajouter un service</a>
+              <a href="/ajout">Ajouter une prestation</a>
               
               <a href="javascript:void(0);" class="icon" onclick="myFunction()">
               <i class="fa fa-bars"></i>
