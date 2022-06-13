@@ -92,11 +92,19 @@ class ContactController extends AbstractController
     public function commandebis(Request $request,
     EntityManagerInterface $manager): Response
     {
-
         $ids=$request->request->get("ids");
+        $prestas = array();
+        $temp = $this->getDoctrine()->getRepository(Prestation::class)->findOneBy(['id'=>1],);
+        array_push($prestas, $temp);
+        $temp = $this->getDoctrine()->getRepository(Prestation::class)->findOneBy(['id'=>2],);
+        array_push($prestas, $temp);
+        foreach ($prestas as $presta){
+            dump($presta);
+        }
         return $this->render('contact/resultat.html.twig', [
             'controller_name' => 'ContactController',
-            'demande' => $service,
+            'ids' => $ids,
+            'presta'=> $presta,
         ]);
     }
 
