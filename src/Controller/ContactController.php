@@ -88,7 +88,7 @@ class ContactController extends AbstractController
 
     /**
      * @IsGranted("ROLE_USER")
-     * @Route("/commandebis", name="commandebiss")
+     * @Route("/commandebis", name="commandebis")
      */
     public function commandebis(Request $request,
     EntityManagerInterface $manager,Security $security): Response
@@ -101,32 +101,69 @@ class ContactController extends AbstractController
 
         }
         $manager->flush();
-        dump($user->getCommande());
-        $prestas = array();
-        $id=0;
-        foreach ($ids as $id){
-            $temp = $this->getDoctrine()->getRepository(Prestation::class)->findOneBy(['id'=>$id],);
-            array_push($prestas, $temp);
-        }
-        $prestanom = array();
-        $prestaprix = array();
-        $total = 0;
-        foreach ($prestas as $presta){
-            array_push($prestanom, $presta->getNom());
-        }
-        foreach ($prestas as $presta){
-            array_push($prestaprix, $presta->getPrix());
-            $total = $total + $presta->getPrix();
-        }
-        return $this->render('contact/resultat.html.twig', [
+        return $this->render('contact/commandebis.html.twig', [
             'controller_name' => 'ContactController',
-            'ids' => $ids,
-            'prestanom'=> $prestanom,
-            'prestaprix'=>$prestaprix,
-            'total' => $total,
-            'iduser'=> $user
         ]);
 
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     * @Route("/panier", name="panier")
+     */
+    public function panier(Security $security): Response
+    {
+        $user=$security->getUser();
+        $iduser=($user->getId());
+        $panier = ($user->getCommande());
+        dump($panier);
+        return $this->render('contact/panier.html.twig', [
+            'controller_name' => 'ContactController',
+            'panier' => $panier,
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     * @Route("/supprpanier", name="suppr")
+     */
+    public function suppr(Request $request,
+    EntityManagerInterface $manager,Security $security): Response
+    {
+        $suppr=$request->request->get("suppr");
+        $user=$security->getUser();
+        foreach($suppr as $supp){
+            $prest=$manager->getRepository(Prestation::class)->find($supp);
+            $user->removeCommande($prest);
+        }
+        $manager->flush();
+        $user=$security->getUser();
+        $iduser=($user->getId());
+        $panier = ($user->getCommande());
+        return $this->render('contact/panier.html.twig', [
+            'controller_name' => 'ContactController',
+            'panier' => $panier,
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     * @Route("/final", name="final")
+     */
+    public function final(Request $request,
+    EntityManagerInterface $manager,Security $security): Response
+    {
+        $suppr=$request->request->get("suppr");
+        $user=$security->getUser();
+        dump($suppr);
+        foreach($suppr as $supp){
+            $prest=$manager->getRepository(Prestation::class)->find($supp);
+            $user->removeCommande($prest);
+        }
+        $manager->flush();
+        return $this->render('contact/fini.html.twig', [
+            'controller_name' => 'ContactController',
+        ]);
     }
 
     /**
@@ -136,6 +173,17 @@ class ContactController extends AbstractController
     public function ajout(): Response
     {
         return $this->render('contact/ajout.html.twig', [
+            'controller_name' => 'ContactController',
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/affiche", name="affiche")
+     */
+    public function affiche(): Response
+    {
+        return $this->render('contact/affiche.html.twig', [
             'controller_name' => 'ContactController',
         ]);
     }

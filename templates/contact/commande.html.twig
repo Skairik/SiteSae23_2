@@ -3,14 +3,14 @@
 {% block body %}
 
 <div class= "Texte">
-    <h1>Liste de nos services</h1> 
+    <h1 class="BgVert">Ajouter au panier</h1> 
     <h3>Services</h3>
     <label> Vous êtes connectez sous le compte {{ app.user.username }} </label> 
     <form action="/commandebis" method="post">
         {% for presta in presta %}
             <input type="checkbox" name="ids[]" value="{{presta.id}}" >  {{ presta.nom }} : {{ presta.prix }} €<br>
         {% endfor %}
-        <button class="button buttonvert centrebut" type="submit">Commander</button>
+        <button class="button buttonvert centrebut" type="submit">Ajouter au panier</button>
     </form>
 </div>
 

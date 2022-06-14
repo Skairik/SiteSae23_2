@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="Texte">
+     <h1 class="BgVert"> Mon panier </h1>
+     <h4> Gérer mon panier </h4>
+     <form action="/supprpanier" method="post">
+          {% for paniers in panier %}
+               <p> {{ paniers.nom }} : {{ paniers.prix }} € <input type="checkBox" name="suppr[]" value="{{ paniers.id }}"></p>
+          {% endfor %}
+          <button class="button buttonvert centrebut" type="submit">Supprimer</button>
+     </form>
+     <h4> Commander </h4>
+     <form action="/final" method="post">
+          {% for paniers in panier %}
+               <p> {{ paniers.nom }} : {{ paniers.prix }} € <input type="checkBox" disabled="disabled" checked="checked" name="suppr[]" value="{{ paniers.id }}"></p>
+               <input type="hidden" id="gne" name="suppr[]" value="{{ paniers.id }}"/>
+          {% endfor %}
+          <button class="button buttonvert centrebut" type="submit">Commander</button>
+     </form>
+</div>
+{% endblock %}
