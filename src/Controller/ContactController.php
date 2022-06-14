@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\Security;
 use App\Entity\Demande;
 use App\Entity\Commande;
 use App\Entity\Prestation;
+use App\Entity\ListeCommande;
 
 class ContactController extends AbstractController
 {
@@ -116,7 +117,6 @@ class ContactController extends AbstractController
         $user=$security->getUser();
         $iduser=($user->getId());
         $panier = ($user->getCommande());
-        dump($panier);
         return $this->render('contact/panier.html.twig', [
             'controller_name' => 'ContactController',
             'panier' => $panier,
@@ -154,8 +154,31 @@ class ContactController extends AbstractController
     EntityManagerInterface $manager,Security $security): Response
     {
         $suppr=$request->request->get("suppr");
+        /*Récupère le total*/
+        $prixs=$request->request->get("prix");
+        $total=0;
+        foreach($prixs as $prix)
+            $total=$total+(int)$prix;
+        /*Je récupe la list de ce qu'il a prix*/
+        $noms=$request->request->get("nom");
+        $nom=implode(", ", $noms); // string(20) "lastname,email,phone"
+        dump($nom);
         $user=$security->getUser();
-        dump($suppr);
+        $iduser=($user->getId());
+        /*Je recupe le nom du mec*/
+        $nomuser=($user->getEmail());
+
+        /*Ajout base de données commande*/
+        $demande = new ListeCommande();
+        $demande->setNom($nomuser);
+        $manager->persist($demande);
+        $demande->setPrix($total);
+        $manager->persist($demande);
+        $demande->setPrestation($nom);
+        $manager->persist($demande);
+        $manager->flush();
+
+        /*Suppr du panier*/
         foreach($suppr as $supp){
             $prest=$manager->getRepository(Prestation::class)->find($supp);
             $user->removeCommande($prest);
@@ -181,10 +204,14 @@ class ContactController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Route("/affiche", name="affiche")
      */
-    public function affiche(): Response
+    public function affiche(Request $request,
+    EntityManagerInterface $manager): Response
     {
+        $affiche=$manager->getRepository(ListeCommande::class)->findAll();
+        dump($affiche);
         return $this->render('contact/affiche.html.twig', [
             'controller_name' => 'ContactController',
+            'affiche'=>$affiche,
         ]);
     }
 

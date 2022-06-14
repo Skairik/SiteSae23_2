@@ -3,8 +3,10 @@
 {% block body %}
 
 <div class="Texte">
-    <h1 class="BgVert">Voici les commandes en cours :</h1>
-    
+    <h1 class="BgVert">Voici les commandes</h1>
+    {% for affiche in affiche %}
+        <p> [Commande n°{{affiche.id}}] User: <u>{{ affiche.nom}}</u>. Prestation : <u>{{ affiche.prestation}}</u> Total: <u>{{ affiche.prix }} €</u></p>
+    {% endfor %}
 </div>
 
 {% endblock %}

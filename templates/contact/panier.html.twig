@@ -6,9 +6,12 @@
      <h1 class="BgVert"> Mon panier </h1>
      <h4> Gérer mon panier </h4>
      <form action="/supprpanier" method="post">
+          {% set somme = 0 %}
           {% for paniers in panier %}
                <p> {{ paniers.nom }} : {{ paniers.prix }} € <input type="checkBox" name="suppr[]" value="{{ paniers.id }}"></p>
+               {% set somme = somme + paniers.prix  %}
           {% endfor %}
+          <p>Total = {{ somme }} €</p>
           <button class="button buttonvert centrebut" type="submit">Supprimer</button>
      </form>
      <h4> Commander </h4>
@@ -16,7 +19,10 @@
           {% for paniers in panier %}
                <p> {{ paniers.nom }} : {{ paniers.prix }} € <input type="checkBox" disabled="disabled" checked="checked" name="suppr[]" value="{{ paniers.id }}"></p>
                <input type="hidden" id="gne" name="suppr[]" value="{{ paniers.id }}"/>
+               <input type="hidden" id="gne" name="nom[]" value="{{ paniers.nom }}"/>
+               <input type="hidden" id="gne" name="prix[]" value="{{ paniers.prix }}"/>
           {% endfor %}
+          <p> Total = {{ somme }} € </p>
           <button class="button buttonvert centrebut" type="submit">Commander</button>
      </form>
 </div>
